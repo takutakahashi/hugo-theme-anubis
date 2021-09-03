@@ -42,7 +42,14 @@
 <meta property="article:publisher" content="https://www.facebook.com/XXX"> -->
 
 {{ if and (.Site.GoogleAnalytics) (or (eq (getenv "HUGO_ENV") "production") (eq .Site.Params.env "production")) }}
-    {{ template "_internal/google_analytics.html" . }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{ .Site.GoogleAnalytics }}');
+</script>
 {{ end }}
 
 {{ partial "head-extra.html" . }}
